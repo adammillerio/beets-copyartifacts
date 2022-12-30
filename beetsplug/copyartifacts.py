@@ -5,7 +5,7 @@ import filecmp
 import beets.util
 from beets import config
 from beets.ui import get_path_formats
-from beets.mediafile import TYPES
+from mediafile import TYPES
 from beets.plugins import BeetsPlugin
 from beets.library import DefaultTemplateFunctions
 from beets.util.functemplate import Template
