@@ -25,7 +25,7 @@ class CopyArtifactsPlugin(BeetsPlugin):
         self._process_queue = []
         self._dirs_seen = []
 
-        self.extensions = self.config['extensions'].as_str_seq()
+        self.extensions = [ext.lower() for ext in self.config['extensions'].as_str_seq()]
         self.print_ignored = self.config['print_ignored'].get()
 
         self.path_formats = [c for c in beets.ui.get_path_formats() if c[0][:4] == u'ext:']
@@ -109,8 +109,8 @@ class CopyArtifactsPlugin(BeetsPlugin):
                 source_file = os.path.join(root, filename)
 
                 # Skip any files extensions handled by beets
-                file_ext = os.path.splitext(filename)[1]
-                if len(file_ext) > 1 and file_ext.decode('utf8')[1:] in TYPES:
+                file_ext = os.path.splitext(filename)[1].lower()
+                if len(file_ext) > 1 and file_ext.decode('utf8')[1:].lower() in TYPES:
                     continue
 
                 non_handled_files.append(source_file)
@@ -147,7 +147,7 @@ class CopyArtifactsPlugin(BeetsPlugin):
             # Skip extensions not handled by plugin
             file_ext = os.path.splitext(filename)[1]
             if ('.*' not in self.extensions
-                and file_ext.decode('utf8') not in self.extensions):
+                and file_ext.decode('utf8').lower() not in self.extensions):
                 ignored_files.append(source_file)
                 continue
 
