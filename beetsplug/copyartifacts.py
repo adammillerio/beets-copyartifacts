@@ -7,7 +7,7 @@ from beets import config
 from beets.ui import get_path_formats
 from mediafile import TYPES
 from beets.plugins import BeetsPlugin
-from beets.library import DefaultTemplateFunctions
+from beets.library.models import DefaultTemplateFunctions
 from beets.util.functemplate import Template
 
 __version__ = '0.1.2'
