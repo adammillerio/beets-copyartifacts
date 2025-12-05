@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setup(
     name="beets-copyartifacts3",
-    version="0.1.5",
+    version="0.1.6",
     description="beets plugin to copy non-music files to import path",
     long_description=readme,
     author='Adam Miller',
@@ -17,7 +17,7 @@ setup(
 
     packages=['beetsplug'],
     namespace_packages=['beetsplug'],
-    install_requires=['beets>=1.3.11'],
+    install_requires=['beets>=2.4.0'],
 
     classifiers=[
         'Topic :: Multimedia :: Sound/Audio',
@@ -25,12 +25,10 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Environment :: Console',
         'Environment :: Web Environment',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
     ]
 )
