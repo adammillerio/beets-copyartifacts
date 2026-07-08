@@ -4,10 +4,10 @@ import filecmp
 
 import beets.util
 from beets import config
-from beets.ui import get_path_formats
 from mediafile import TYPES
 from beets.plugins import BeetsPlugin
 from beets.library.models import DefaultTemplateFunctions
+from beets.util.pathformats import get_path_formats
 from beets.util.functemplate import Template
 
 __version__ = '0.1.2'
@@ -28,7 +28,7 @@ class CopyArtifactsPlugin(BeetsPlugin):
         self.extensions = self.config['extensions'].as_str_seq()
         self.print_ignored = self.config['print_ignored'].get()
 
-        self.path_formats = [c for c in beets.ui.get_path_formats() if c[0][:4] == u'ext:']
+        self.path_formats = [c for c in get_path_formats(beets.config["paths"]) if c[0][:4] == u'ext:']
 
         self.register_listener('item_moved', self.collect_artifacts)
         self.register_listener('item_copied', self.collect_artifacts)

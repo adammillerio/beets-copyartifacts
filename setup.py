@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 
 with open('README.rst') as f:
     readme = f.read()
@@ -15,8 +15,7 @@ setup(
     license='MIT',
     platforms='ALL',
 
-    packages=['beetsplug'],
-    namespace_packages=['beetsplug'],
+    packages=find_namespace_packages(include=["beetsplug*"]),
     install_requires=['beets>=2.4.0'],
 
     classifiers=[
