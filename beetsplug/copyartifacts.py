@@ -13,6 +13,19 @@ from beets.util.functemplate import Template
 __version__ = '0.1.2'
 __author__ = 'Sami Barakat <sami@sbarakat.co.uk>'
 
+
+def _ignore_patterns_for_path(path, ignore_patterns):
+    """Return ignore glob patterns matching the type of ``path``.
+
+    Beets 2.13+ ``sorted_walk`` requires path components and ignore
+    patterns to share the same type (``str`` or ``bytes``). Item paths
+    are bytes, but config ignore patterns are strings.
+    """
+    if isinstance(path, str):
+        return ignore_patterns
+    return list(map(os.fsencode, ignore_patterns))
+
+
 class CopyArtifactsPlugin(BeetsPlugin):
     def __init__(self):
         super(CopyArtifactsPlugin, self).__init__()
@@ -102,9 +115,12 @@ class CopyArtifactsPlugin(BeetsPlugin):
         if source_path in self._dirs_seen:
             return
 
+        ignore = _ignore_patterns_for_path(
+            source_path, config['ignore'].as_str_seq()
+        )
         non_handled_files = []
         for root, dirs, files in beets.util.sorted_walk(
-                    source_path, ignore=config['ignore'].as_str_seq()):
+                    source_path, ignore=ignore):
             for filename in files:
                 source_file = os.path.join(root, filename)
 
